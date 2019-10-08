@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Metronic | Charts - Flotchart</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,300,600,700&subset=all" rel="stylesheet" type="text/css"/>
+<link href="assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/global/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+<link href="assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
+<link href="assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
+<link href="assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
+<link id="style_color" href="assets/admin/layout/css/themes/darkblue.css" rel="stylesheet" type="text/css"/>
+<link href="assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+<link rel="shortcut icon" href="favicon.ico"/>
+</head>
+<body class="page-header-fixed page-quick-sidebar-over-content ">
+
+<div class="container">
+	<div class="page-content">
+		<!-- BEGIN CHART PORTLETS-->
+		<div class="row" style="padding-top: 20px; padding-bottom: 20px">
+			<div class="col-md-6">
+				<!-- <div class="col-md-3"><p id="msg"></p></div> -->
+				<div class="col-md-4" style="padding-top:7px" >
+					<input type="file"  id="multiFiles" name="files[]" multiple="multiple" />
+				</div>
+				<div class="col-md-3">
+					<input type="button" class="btn btn-success" id="uploadAction" value="upload"/>
+				</div>				
+			</div>
+			<div class="col-md-3">
+				<input type="button" id="analysis" class="btn btn-success"  value="Analysis" name="">
+			</div>
+			<div class="col-md-3">
+				<input type="button" id="format" class="btn btn-danger" style="float:right;" value="Format" name="">
+			</div>				
+		</div>
+
+		<div class="row">
+			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+				<div class="dashboard-stat red-intense">
+					<div class="visual">
+						<i class="fa fa-bar-chart-o"></i>
+					</div>
+					<div class="details">
+						<div class="number" id="period">
+							Selected
+						</div>
+						<div class="desc">
+							Period
+						</div>
+					</div>
+					<a class="more" href="javascript:;">
+						View<i class="fa fa-user m-icon-white"></i>
+					</a>
+				</div>
+			</div>
+
+			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+				<div class="dashboard-stat blue-madison">
+					<div class="visual">
+						<i class="fa fa-comments"></i>
+					</div>
+					<div class="details">
+						<div class="number" id="customer">
+							0
+						</div>
+						<div class="desc">
+							Forecast Customers
+						</div>
+					</div>
+					<a class="more" href="javascript:;">
+						View<i class="fa fa-user m-icon-white"></i>
+					</a>
+				</div>
+			</div>
+			
+			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+				<div class="dashboard-stat green-haze">
+					<div class="visual">
+						<i class="fa fa-shopping-cart"></i>
+					</div>
+					<div class="details">
+						<div class="number" id="ticket">
+							0
+						</div>
+						<div class="desc">
+							Total tickets
+						</div>
+					</div>
+					<a class="more" href="javascript:;">
+						View<i class="fa fa-user m-icon-white"></i>
+					</a>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+				<div class="dashboard-stat purple-plum">
+					<div class="visual">
+						<i class="fa fa-globe"></i>
+					</div>
+					<div class="details">
+						<div class="number" id="operator">
+							0
+						</div>
+						<div class="desc">
+							Operators
+						</div>
+					</div>
+					<a class="more" href="javascript:;">
+						View<i class="fa fa-user m-icon-white"></i>
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<!-- armchart -->
+		<div class="row">
+			<div class="col-md-12">
+				<!-- BEGIN CHART PORTLET-->
+				<div class="portlet light bordered">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="icon-bar-chart font-green-haze"></i>
+							<span class="caption-subject bold uppercase font-green-haze"> Customer Per Day</span>
+						</div>	
+						<div class="tools">
+							<a href="javascript:;" class="collapse">
+							</a>
+						</div>					
+					</div>
+					<div class="portlet-body">
+						<div id="chart_1" class="chart" style="height: 300px;">
+						</div>
+					</div>
+				</div>
+				<!-- END CHART PORTLET-->
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- BEGIN CHART PORTLET-->
+				<div class="portlet light bordered">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="icon-bar-chart font-green-haze"></i>
+							<span class="caption-subject bold uppercase font-green-haze"> Customer Per Week</span>
+						</div>		
+						<div class="tools">
+							<a href="javascript:;" class="collapse">
+							</a>
+						</div>				
+					</div>
+					<div class="portlet-body">
+						<div id="chart_13" class="chart" style="height: 300px;">
+						</div>
+					</div>
+				</div>
+				<!-- END CHART PORTLET-->
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- BEGIN CHART PORTLET-->
+				<div class="portlet light bordered">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="icon-bar-chart font-green-haze"></i>
+							<span class="caption-subject bold uppercase font-green-haze"> Customer Per Hour</span>
+						</div>		
+						<div class="tools">
+							<a href="javascript:;" class="collapse">
+							</a>
+						</div>				
+					</div>
+					<div class="portlet-body">
+						<div id="chart_14" class="chart" style="height: 300px;">
+						</div>
+					</div>
+				</div>
+				<!-- END CHART PORTLET-->
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- BEGIN CHART PORTLET-->
+				<div class="portlet light bordered">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="icon-bar-chart font-green-haze"></i>
+							<span class="caption-subject bold uppercase font-green-haze"> Customer Per Weekend</span>
+						</div>				
+						<div class="tools">
+							<a href="javascript:;" class="collapse">
+							</a>
+						</div>		
+					</div>
+					<div class="portlet-body">
+						<div id="chart_15" class="chart" style="height: 300px;">
+						</div>
+					</div>
+				</div>
+				<!-- END CHART PORTLET-->
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-5">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="fa fa-gift"></i>top 10 Performance Employees
+						</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse">
+							</a>
+						</div>
+					</div>
+					<div class="portlet-body" class="chart2">
+						<div id="top10PerformanceEmployees" style="height:350px; text-align: left;padding-left:108px"></div>
+						<div class="btn-toolbar">
+							<div class="btn-group stackControls"></div>									
+							<div class="btn-group graphControls"></div>
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="col-md-7">
+				<div class="portlet box yellow">
+					<div class="portlet-title">
+						<div class="caption">
+							<i class="fa fa-gift"></i>top 10 Waiting Time
+						</div>
+						<div class="tools">
+							<a href="javascript:;" class="collapse">
+							</a>
+						</div>
+					</div>
+					<div class="portlet-body" class="chart2">
+						<div id="top10WaitingTime" style="height:350px; text-align: center;"></div>
+						<div class="btn-toolbar">
+							<div class="btn-group stackControls"></div>									
+							<div class="btn-group graphControls"></div>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>
+
+		<div class="col-md-6">
+			<!-- BEGIN CHART PORTLET-->
+			<div class="portlet light bordered">
+				<div class="portlet-title">
+					<div class="caption">
+						<i class="icon-bar-chart font-green-haze"></i>
+						<span class="caption-subject bold uppercase font-green-haze"> KPI Chart</span>
+					</div>
+					<div class="tools">
+						<a href="javascript:;" class="collapse">
+						</a>
+					</div>
+				</div>
+				<div class="portlet-body">
+					<div id="chart_6" class="chart" style="height: 525px;">
+					</div>
+				</div>
+			</div>
+			<!-- END CHART PORTLET-->
+		</div>
+		<!-- armchart -->
+
+		
+	</div>
+</div>
+
+
+
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="js/jquery.ajaxfileupload.js"></script><!-- insert -->
+<script src="js/upload.js"></script><!-- insert -->
+
+<script src="assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+
+
+
+<script src="assets/global/plugins/flot/jquery.flot.min.js"></script>
+<script src="assets/global/plugins/flot/jquery.flot.resize.min.js"></script>
+<script src="assets/global/plugins/flot/jquery.flot.pie.min.js"></script>
+<script src="assets/global/plugins/flot/jquery.flot.stack.min.js"></script>
+<script src="assets/global/plugins/flot/jquery.flot.crosshair.min.js"></script>
+<script src="assets/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
+
+<script src="assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
+<script src="assets/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>
+<script src="assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
+<script src="assets/global/plugins/amcharts/amcharts/radar.js" type="text/javascript"></script>
+<script src="assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
+<script src="assets/global/plugins/amcharts/amcharts/themes/patterns.js" type="text/javascript"></script>
+<script src="assets/global/plugins/amcharts/amcharts/themes/chalk.js" type="text/javascript"></script>
+<script src="assets/global/plugins/amcharts/ammap/ammap.js" type="text/javascript"></script>
+<script src="assets/global/plugins/amcharts/ammap/maps/js/worldLow.js" type="text/javascript"></script>
+<script src="assets/global/plugins/amcharts/amstockcharts/amstock.js" type="text/javascript"></script>
+
+<!-- <script src="assets/admin/pages/scripts/ui-blockui.js"></script> -->
+<script src="assets/global/scripts/metronic.js" type="text/javascript"></script>
+<script src="assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+<!-- <script src="assets/admin/pages/scripts/charts-flotcharts.js"></script> -->
+<script src="assets/admin/pages/scripts/charts-amcharts.js"></script>
+<script type="text/javascript" src="js/customerPerHour.js"></script><!-- insert -->
+<script type="text/javascript" src="js/customerPerDay.js"></script><!-- insert -->
+<script type="text/javascript" src="js/customerPerWeek.js"></script><!-- insert -->
+<script type="text/javascript" src="js/customerPerWeekend.js"></script><!-- insert -->
+<script type="text/javascript" src="js/kpi.js"></script><!-- insert -->
+<script type="text/javascript" src="js/analysis.js"></script><!-- insert -->
+<script>
+jQuery(document).ready(function() {   
+   	Metronic.init(); // init metronic core components
+	Demo.init(); // init demo features
+   	// armchart
+   	ChartsAmcharts.init();
+});
+</script>
+</body>
+</html>
